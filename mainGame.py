@@ -60,15 +60,15 @@ class CentralCorridor(Scene):
 		print ("The problem is you need to go retrive a lightsaber.")
 		print ("Ahead of you there are three doors.")
 		action = input("1.Left door \n2.Middle door\n3.Right door\n> ")
-		if action == "1":
+		if action == 1:
 			print ("\nYou turn left, and begin to enter into the room.\n")
 			time.sleep(1)
 			return 'towerOfHanoi'
-		elif action == "2":
+		elif action == 2:
 			print ("\nYou feel a stinging, but walk through the ominious door.\n")
 			time.sleep(1)
 			return 'riverOfAcid'
-		elif action == "3":
+		elif action == 3:
 			print ("\nHorrible screeches are heard, but there is a need to press on.")
 			time.sleep(1)
 			return 'terrorRoom'
@@ -93,7 +93,7 @@ class RiverOfAcid(Scene):
 					choice = input(">")
 					print ("\n")
 					# CHOICE IF THEY DECIDE TO THROW THE GRENADE
-					if choice == '1':
+					if choice == 1:
 					
 						print ('You throw the grenade, immediately the ice ripples from where it hit.')
 						print ('Branching to the edges of the river in a thick sheet of ice.')
@@ -102,7 +102,7 @@ class RiverOfAcid(Scene):
 						riverIced = True 	
 						return self.cross_river()
 					# IF THEY DECIDE TO WALK AWAY.
-					elif choice == '2':
+					elif choice == 2:
 						return 'central_corridor'
 						
 					# IF UNLISTED CHOICE CHOOSEN
@@ -116,14 +116,14 @@ class RiverOfAcid(Scene):
 					print ('\n')
 					
 					# CHOICE IF THEY DECIDE TO THROW GRENADE
-					if choice == '1':
+					if choice == 1:
 						print ("You launch the grenede into the bubbling acid river.")
 						print ("A rumbling starts to occur.")
 						print ("The whole river lights up in a spectacular fireball.\n")
 						return 'death'
 					
 					# IF THEY WALK AWAY 
-					elif choice == "2":
+					elif choice == 2:
 						return 'central_corridor'
 					
 					# UNKNOWN COMMAND
@@ -137,7 +137,7 @@ class RiverOfAcid(Scene):
 					print ("\n")
 					
 					# CHOICE IF THEY DECIDE TO THROW THE COLD GRENADE
-					if choice == '1':
+					if choice == 1:
 					
 						print ('You throw the grenade, immediately the ice ripples from where it hit.')
 						print ('Branching to the edges of the river in a thick sheet of ice.')
@@ -146,14 +146,14 @@ class RiverOfAcid(Scene):
 						return self.cross_river()
 											
 					# CHOICE IF THEY DECIDE TO THROW THE FIRE GRENADE
-					elif choice == '2':
+					elif choice == 2:
 						print ("You launch the grenede into the bubbling acid river.")
 						print ("A rumbling starts to occur.")
 						print ("The whole river lights up in a spectacular fireball.")
 						return 'death'
 						
 					# IF THEY WALK AWAY 
-					elif choice == "3":
+					elif choice == 3:
 						return 'central_corridor'
 					
 					# UNKNOWN COMMAND
@@ -168,7 +168,7 @@ class RiverOfAcid(Scene):
 					choice = input(">")
 					print ("\n")
 					# IF STATEMENT EITHER SENDING CHARACTER TO CENTRAL_CORRIDOR OR NOT UNDERSTANDING WHAT WAS WRITTEN.
-					if choice == "1":
+					if choice == 1:
 						return 'central_corridor'
 				
 					else:
@@ -183,11 +183,11 @@ class RiverOfAcid(Scene):
 	
 	def cross_river(self):
 		print ("Do you wish to walk over?")
-		action = input("1.Yes\2.No\n>")
-		if action == "1":
+		action = input("1.Yes\n2.No\n>")
+		if action == 1:
 			return 'lightsaber_room'
 		
-		elif action == "2":
+		elif action == 2:
 			return 'central_corridor'
 		
 		else:
@@ -217,7 +217,7 @@ class RiverOfAcid(Scene):
 		
 	def no_ice_message(self):
 		print ("A large room with a river of acid flows through it.")
-		print ("To dangerous to simply walk through.")
+		print ("Too dangerous to simply walk through.")
 		print ("If only there was some sort of way to walk over the river.\n")
 		
 		
@@ -296,7 +296,7 @@ class TerrorRoom(Scene):
 		
 		action = input(">")
 		
-		if action == "1":
+		if action == 1:
 			print ("-----Player Attacks-----")
 			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek2.get_armor(), player.get_strength_modifier()):
 				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
@@ -310,7 +310,7 @@ class TerrorRoom(Scene):
 			else:
 				print ("MISS")
 				return ("terrorRoom")
-		elif action == "2":	
+		elif action == 2:	
 			print ("-----Player Attacks-----")
 			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek2.get_armor(), player.get_strength_modifier()):
 				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
@@ -325,7 +325,7 @@ class TerrorRoom(Scene):
 				print ("MISS")
 				return ("terrorRoom")
 		
-		elif action == "3":
+		elif action == 3:
 			return 'central_corridor'
 		
 		else:
@@ -334,7 +334,7 @@ class TerrorRoom(Scene):
 	def players_turn_first(self):
 		action = input(">")
 			
-		if action == "1":
+		if action == 1:
 			print ("-----Player Attacks-----")
 			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek1.get_armor(), player.get_strength_modifier()):
 				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
@@ -349,7 +349,7 @@ class TerrorRoom(Scene):
 				print ("MISS"	)
 				return ("terrorRoom")
 						
-		elif action == "2":
+		elif action == 2:
 			return 'central_corridor'
 			
 		else:
@@ -358,7 +358,7 @@ class TerrorRoom(Scene):
 	def players_turn_second(self):
 		action = input(">")
 			
-		if action == "1":
+		if action == 1:
 			print ("\n-----Player Attacks-----")
 			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek2.get_armor(), player.get_strength_modifier()):
 				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
@@ -374,7 +374,7 @@ class TerrorRoom(Scene):
 				return ("terrorRoom")
 							
 		
-		elif action == "2":
+		elif action == 2:
 			return 'central_corridor'
 		
 		else:
@@ -433,13 +433,13 @@ class IceAndFire(Scene):
 				
 				choice = input(">")
 				
-				if choice == "1":
+				if choice == 1:
 					self.remove_cold_grenade()
 					
-				elif choice == "2":
+				elif choice == 2:
 					self.remove_fire_grenade()
 				
-				elif choice == '3': 
+				elif choice == 3: 
 					return 'central_corridor'
 				
 				else:
@@ -449,10 +449,10 @@ class IceAndFire(Scene):
 				
 				choice = input(">")
 				
-				if choice == "1":
+				if choice == 1:
 					self.remove_cold_grenade()
 				
-				elif choice == '2': 
+				elif choice == 2: 
 					return 'central_corridor'
 				
 				else:
@@ -463,10 +463,10 @@ class IceAndFire(Scene):
 				
 				choice = input(">")
 				
-				if choice == '1':
+				if choice == 1:
 					self.remove_fire_grenade()
 					
-				elif choice =='2':
+				elif choice ==2:
 					return 'central_corridor'
 				
 				else:
@@ -476,7 +476,7 @@ class IceAndFire(Scene):
 				
 				choice = input(">")
 				
-				if choice == "1":
+				if choice == 1:
 					return 'central_corridor' # CHANGE TO terrorRoom
 				else:
 					print ("There is nothing to do here now.")
@@ -547,13 +547,13 @@ class LightsaberRoom(Scene):
 			return self.overall_choice(action)
 		
 	def overall_choice(self, action):
-		if action == "1":
+		if action == 1:
 			return self.approach_option()
 		
-		elif action == "2":
+		elif action == 2:
 			return 'riverOfAcid'
 		
-		elif action == '3':
+		elif action == 3:
 			return self.investigate_option()
 	
 	
@@ -561,16 +561,16 @@ class LightsaberRoom(Scene):
 		print ("The container opens by itself.")
 		print ("An eminating darkness comes from within the container.")
 	
-		choice = input("1.Reach in\n2.Kick\n>")
+		choice = input("1.Reach in\n2.Kick it\n>")
 		return self.container_options(choice)
 		
 	def container_options(self, choice):
-		if choice == "reach in":
+		if choice == 1:
 			print ('You grasp the sith lightsaber, filling you with hate; your power 10 folds.')
 			print ('You are now considered a True Sith.')
 			return 'finished'
 		
-		elif choice == "kick":
+		elif choice == 2:
 			print ("You kick the container.")
 			print ("A sudden jolt and a flash of light is seen.")
 			print ("The lightsaber is in your chest.")
@@ -596,10 +596,10 @@ class TowerOfHanoiRoom(Scene):
 			choice = input(">")
 			print ('\n')
 			
-			if choice == '1':
+			if choice == 1:
 				return 'towerOfHanoi'
 				
-			elif choice == "2":
+			elif choice == 2:
 				return 'central_corridor'
 			
 			else:
@@ -612,13 +612,13 @@ class TowerOfHanoiRoom(Scene):
 			# NOTICE THE PILLARS 
 			print ("You see three pillars of energy within the room.")
 			print ("There seems to be a console.")
-			action = input("1.approach\n2.Hack\n3.Walk away\n>") # GETTING AN ACTION
+			action = input("1.Approach\n2.Hack\n3.Walk away\n>") # GETTING AN ACTION
 			
 			# CREATING THE LISTS FOR PILLARS
 			left_pillar = ["bottom", "lower-mid", "upper-mid", "top"] # FILLING LEFT_PILLAR WITH ENERGY BANDS
 			middle_pillar = [] # CREATE A MIDDLE_PILLAR
 			right_pillar = [] # CREATE A RIGHT_PILLAR
-			if action == "1":
+			if action == 1:
 			# Printing out the rules for the game
 				self.rules()
 				# Looping the possible menus options
@@ -631,17 +631,17 @@ class TowerOfHanoiRoom(Scene):
 				
 						choice = input(">")
 						print ('\n')
-						if choice == "1":
+						if choice == 1:
 							# Opening up submenu for actions from left pillar
 							self.move_from_left(left_pillar, middle_pillar, right_pillar)
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == "2":
+						elif choice == 2:
 							self.reset_systems(left_pillar,middle_pillar,right_pillar)
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == "3":
+						elif choice == 3:
 							return 'central_corridor'
 						
-						elif choice == "4":
+						elif choice == 4:
 							self.rules()
 							
 						else:
@@ -652,16 +652,16 @@ class TowerOfHanoiRoom(Scene):
 					
 						choice = input(">")
 					
-						if choice == "1":
+						if choice == 1:
 							self.move_from_left()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == "2":
+						elif choice == 2:
 							self.move_from_middle()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == "3":
+						elif choice == 3:
 							self.reset_systems(left_pillar, middle_pillar, right_pillar)
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == "4":
+						elif choice == 4:
 							return 'towerOfHanoi'
 						
 						elif choice == "5":
@@ -676,19 +676,19 @@ class TowerOfHanoiRoom(Scene):
 					
 						choice = input(">")
 					
-						if choice == '1':
+						if choice == 1:
 							self.move_from_left()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '2':
+						elif choice == 2:
 							self.move_from_right()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '3':
+						elif choice == 3:
 							self.reset_systems(left_pillar, middle_pillar, right_pillar)
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '4':
+						elif choice == 4:
 							return 'room'
 						
-						elif choice == '5':
+						elif choice == 5:
 							self.rules()
 						
 						else: 
@@ -700,22 +700,22 @@ class TowerOfHanoiRoom(Scene):
 				
 						choice = input(">")
 					
-						if choice == '1':
+						if choice == 1:
 							self.move_from_left()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '2':
+						elif choice == 2:
 							self.move_from_middle()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '3':
+						elif choice == 3:
 							self.move_from_right()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '4':
+						elif choice == 4:
 							self.reset_systems(left_pillar, middle_pillar, right_pillar)
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '5':
+						elif choice == 5:
 							return 'room'
 						
-						elif choice == '6':
+						elif choice == 6:
 							self.rules()
 						
 						else: 
@@ -726,19 +726,19 @@ class TowerOfHanoiRoom(Scene):
 						#choices_for_middle_right_full()
 						choice = input(">")
 					
-						if choice == '1':
+						if choice == 1:
 							self.move_from_middle()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '2':
+						elif choice == 2:
 							self.move_from_right()
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '3':
+						elif choice == 3:
 							self.reset_systems(left_pillar, middle_pillar, right_pillar)
 							self.displaying_Current(left_pillar, middle_pillar, right_pillar)
-						elif choice == '4':	
+						elif choice == 4:	
 							return 'room'
 						
-						elif choice == '5':
+						elif choice == 5:
 							self.rules()
 						
 						else: 
@@ -762,12 +762,12 @@ class TowerOfHanoiRoom(Scene):
 						towerOfHanoiCompleted = True
 						time.sleep(2)
 						return 'central_corridor'
-			elif action == "2":
+			elif action == 2:
 			# THINGS THAT HAPPENS WHEN THE PLAYER DECIDES TO HACK
 				print ("Trying to be elite haxor is risky buisness")
 				time.sleep(2)
 				return 'death'
-			elif action == "3":
+			elif action == 3:
 				time.sleep(2)
 				return 'central_corridor'
 			
@@ -835,20 +835,20 @@ class TowerOfHanoiRoom(Scene):
 		print ("2. Move to right pillar")
 		print ("3. Cancel action ")
 		choice = input(">")
-		if choice == '1':
+		if choice == 1:
 			print ("Move to Middle")
 			# SAVING LAST IN LEFT LIST
 			# APPLYING LAST IN LIST TO PROPER INDEX
 			# REMOVING LAST IN LEFT LIST
 		
-		elif choice == '2':
+		elif choice == 2:
 			print ("Move to Right")
 			# SAVING LAST IN LEFT LIST
 			# APPLYING LAST IN LIST TO PROPER INDEX
 			# REMOVING LAST IN LEFT LIST 
 			
 			
-		elif choice == '3':
+		elif choice == 3:
 			# SENDING BACK TO THE PRIOR METHOD
 			return 
 		
@@ -861,19 +861,19 @@ class TowerOfHanoiRoom(Scene):
 		print ("2. Move to right pillar")
 		print ("3. Cancel action")
 		choice = input(">")
-		if choice == '1':
+		if choice == 1:
 			print ("Move to Left")
 			# SAVING LAST IN MIDDLE LIST
 			# APPLYING LAST IN LIST TO PROPER INDEX
 			# REMOVING LAST IN MIDDLE LIST
 		
-		elif choice == '2':
+		elif choice == 2:
 			print ("Move to Right")
 			# SAVING LAST IN MIDDLE LIST
 			# APPLYING LAST IN LIST TO PROPER INDEX
 			# REMOVING LAST IN MIDDLE LIST
 		
-		elif choice == '3':
+		elif choice == 3:
 			# SENDING BACK TO PRIOR METHOD
 			return
 		
@@ -886,19 +886,19 @@ class TowerOfHanoiRoom(Scene):
 		print ("2. Move to middle pillar")
 		print ("3. Cancel action")
 		choice = input(">")
-		if choice == '1':
+		if choice == 1:
 			print ("Move to Left")
 			# SAVING LAST IN RIGHT LIST
 			# APPLYING LAST IN LIST TO PROPER INDEX
 			# REMOVING LAST IN RIGHT LIST
 		
-		elif choice == '2':
+		elif choice == 2:
 			print ("Move to Middle")
 			# SAVING LAST IN RIGHT LIST
 			# APPLYING LAST IN LIST TO PROPER INDEX
 			# REMOVING LAST IN RIGHT LIST
 		
-		elif choice == '3':
+		elif choice == 3:
 			# SENDING BACK TO PRIOR METHOD
 			return 
 		
