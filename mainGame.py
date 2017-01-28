@@ -18,10 +18,10 @@ cyclinder_left = ["cold"]# LEFT CYCLINDER HAVING "COLD"
 cyclinder_right = ["fire"] # RIGHT CYCLINDER HAVING "FIRE"
 
 # ENTITY CREATION
-player = Entity(70, 14, 20, 6, 4) # MAKING A CHARACTER STATS, 100 HEALTH, ARMOR 20, 20 SIDED DICE, ATTACK DICE OF 6
-terentatek1 = Entity(4, 3, 20, 3, 3) # MAKING ENEMY STATS, 40 HEALTH, 1 ARMOR, 20 SIDED DICE, ATTACK DICE OF 8
-terentatek2  = Entity(4, 3, 20, 3, 3) # MAKING ENEMY STATS, 40 HEALTH, 1 ARMOR, 20 SIDED DICE, ATTACK DICE OF 8
-
+player = Entity(100, 14, 20, 6, 4) # MAKING A CHARACTER STATS, 100 HEALTH, ARMOR 20, 20 SIDED DICE, ATTACK DICE OF 6
+terentatek1 = Entity(8, 3, 20, 4, 1) # MAKING ENEMY STATS, 40 HEALTH, 1 ARMOR, 20 SIDED DICE, ATTACK DICE OF 8
+terentatek2  = Entity(8, 3, 20, 4, 1) # MAKING ENEMY STATS, 40 HEALTH, 1 ARMOR, 20 SIDED DICE, ATTACK DICE OF 8
+	# def __init__(self, health, armor, twenty_sided_dice, attack_dice, strength_modifier):
 class Scene(object):
 	def enter(self):
 		print ("This scene is not yet configured. Subclass it and implement enter().")
@@ -202,6 +202,7 @@ class RiverOfAcid(Scene):
 	def river_options_fire_only(self):
 		print ('1. Throw fire grenade')
 		print ('2. Walk away')
+
 	# GIVING OPTION TO THROW GRENADES OR WALK AWAY
 	def river_options_both(self):
 		print ('1. Throw cold grenade')
@@ -233,7 +234,8 @@ class TerrorRoom(Scene):
 			alreadyEnteredRoom = True
 			
 		# TWENTY SIDED DICE
-		player.get_twenty_sided_dice() 
+		player.get_twenty_sided_dice()
+
 		# GRABBING PLAYER STATS
 		player.get_health()
 		player.get_strength_modifier()
@@ -250,36 +252,33 @@ class TerrorRoom(Scene):
 		
 		# TERENTATEK2 STAT 
 		terentatek2.get_health()
+
+		# terentatek1.print_stats()
+		# terentatek2.print_stats()
+
 		repeat = True
+
 		while repeat:
 			if terentatek1.get_health() > 0 and terentatek2.get_health() > 0:
 				if player.get_health() <= 0: 
-					
 					return 'death'
 					repeat = False
 				else:
 					print ("\nBoth are alive!")
 					self.first_terentatek_attempt()
 					self.second_terentatek_attempt()
-				
 					self.options()
 					return self.players_turn_both()
-				
 			elif terentatek1.get_health() <= 0 and terentatek2.get_health() > 0:
-				
-				
 				if player.get_health() <= 0: 
 					return 'death'
 					repeat = False
 				else:
 					print ("\nThe second Terentatek is alive!")
 					self.second_terentatek_attempt()
-					
 					self.options_second_only()
 					return self.players_turn_second() 
 			elif terentatek1.get_health() > 0 and terentatek2.get_health()<= 0:
-				
-	
 				if player.get_health() <= 0: 
 					return 'death'
 					repeat = False
@@ -289,31 +288,30 @@ class TerrorRoom(Scene):
 					self.options_first_only()
 					return self.players_turn_first()
 			else: 
-				print ("Both have been defeated!")
+				print ("\nBoth have been defeated!")
 				return 'landOfIceAndFire'
 	
 	def players_turn_both(self):
-		
 		action = input(">")
 		
 		if action == 1:
-			print ("-----Player Attacks-----")
-			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek2.get_armor(), player.get_strength_modifier()):
-				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
+			print ("-----Player Attacks First Terentatek-----")
+			if player.chance_to_hit():
+				damage = player.attack_dice_roll()
 				
 				print ("HIT: - %d" % damage)
-				terentatek2.health_remover(damage)
+				terentatek1.health_remover(damage)
 				print ("First Terentatek HEALTH: %s" % terentatek1.get_health())
 				if terentatek1.get_health() < 0:
-					print ("FirstTerentatek died")
+					print ("First Terentatek died")
 				return "terrorRoom"
 			else:
 				print ("MISS")
 				return ("terrorRoom")
 		elif action == 2:	
-			print ("-----Player Attacks-----")
-			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek2.get_armor(), player.get_strength_modifier()):
-				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
+			print ("-----Player Attacks Second Terentatek-----")
+			if player.chance_to_hit():
+				damage = player.attack_dice_roll()
 				
 				print ("HIT: - %d" % damage)
 				terentatek2.health_remover(damage)
@@ -331,13 +329,14 @@ class TerrorRoom(Scene):
 		else:
 			print ("No action taken!!!")	
 			return "terrorRoom"
+
 	def players_turn_first(self):
 		action = input(">")
 			
 		if action == 1:
-			print ("-----Player Attacks-----")
-			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek1.get_armor(), player.get_strength_modifier()):
-				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
+			print ("-----Player Attacks First Terentatek-----")
+			if player.chance_to_hit():
+				damage = player.attack_dice_roll()
 				
 				print ("HIT: - %d" % damage)
 				terentatek1.health_remover(damage)
@@ -355,13 +354,14 @@ class TerrorRoom(Scene):
 		else:
 			print ("No action taken!!!")	
 			return "terrorRoom"	
+
 	def players_turn_second(self):
 		action = input(">")
 			
 		if action == 1:
-			print ("\n-----Player Attacks-----")
-			if player.chance_to_hit(player.get_twenty_sided_dice(), terentatek2.get_armor(), player.get_strength_modifier()):
-				damage = player.attack_dice_roll(player.get_twenty_sided_dice(),player.get_strength_modifier())
+			print ("\n-----Player Attacks Second Terentatek-----")
+			if player.chance_to_hit():
+				damage = player.attack_dice_roll()
 				
 				print ("HIT: - %d" % damage)
 				terentatek2.health_remover(damage)
@@ -380,26 +380,27 @@ class TerrorRoom(Scene):
 		else:
 			print ("No action taken!!!")	
 			return "terrorRoom"
+
 	# DEFINITION WILL DO THE FIRST TERENTAEK TURN IN ATTACKING THE PLAYER CHARACTER		
 	def first_terentatek_attempt(self):
 		print ("\n-----First Terentatek Attacks-----")
 		time.sleep(1)
-		if terentatek1.chance_to_hit(player.get_twenty_sided_dice(), player.get_armor(), terentatek1.get_strength_modifier()):
-			damage = terentatek1.attack_dice_roll(player.get_twenty_sided_dice(),terentatek1.get_strength_modifier())
+		if terentatek1.chance_to_hit():
+			damage = terentatek1.attack_dice_roll()
 			
 			print ("HIT: - %d" % damage)
 			player.health_remover(damage)
 			print ("PLAYER HEALTH: %s" % player.get_health())		
 		else:
 			print ("MISS")
-				
+			print ("PLAYER HEALTH: %s" % player.get_health())				
 			
 	# DEFINITION WILL DO THE SECOND TERENTAEK TURN IN ATTACKING THE PLAYER CHARCTER.
 	def second_terentatek_attempt(self):
 		print ("\n-----Second Terentatek Attacks-----")
 		time.sleep(1)
-		if terentatek2.chance_to_hit(player.get_twenty_sided_dice(), player.get_armor(), terentatek2.get_strength_modifier()):
-			damage = terentatek2.attack_dice_roll(player.get_twenty_sided_dice(),terentatek2.get_strength_modifier())
+		if terentatek2.chance_to_hit():
+			damage = terentatek2.attack_dice_roll()
 			
 			print ("HIT: - %d" % damage)
 			player.health_remover(damage)
@@ -407,6 +408,8 @@ class TerrorRoom(Scene):
 			
 		else:
 			print ("MISS")
+			print ("PLAYER HEALTH: %s" % player.get_health())		
+
 	def options(self):
 		print ("\n1. Attack first terentatek")
 		print ("2. Attack second terentatek")
@@ -424,7 +427,7 @@ class TerrorRoom(Scene):
 # CLASS THAT HAS TWO GRANADES IN PILLARS TO BE CHOSEN
 class IceAndFire(Scene):
 	def enter(self):
-		print ("Within the room lies a two large cyclinders.")
+		print ("\nWithin the room lies a two large cyclinders.")
 		
 		while True:
 		

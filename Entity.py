@@ -19,8 +19,7 @@ class Entity(object):
 		print ("Strength Modifier: %d" % self.get_strength_modifier())
 		print ("\n")
 		
-	
-	
+
 	def get_strength_modifier(self):
 		return self.strength_modifier
 		
@@ -36,27 +35,28 @@ class Entity(object):
 	def get_attack_dice(self):
 		return self.attack_dice
 	
-	def chance_to_hit(self, twenty_sided_dice, armor, strength_modifier):
-		chance = random.randint(1, twenty_sided_dice)
+	def chance_to_hit(self):
+		chance = random.randint(1, self.twenty_sided_dice)
 		
 		if chance == 20:
 			return True
 		
-		chance = chance + strength_modifier
-		if chance >= armor:
+		chance = chance + self.strength_modifier
+		if chance >= self.armor:
 			return True
 		
-		elif chance < armor:
+		elif chance < self.armor:
 			return False
 		
-	def attack_dice_roll(self, attack_dice, strength_modifier):
-		attack_damage = random.randint(1, attack_dice)
-		attack_damage = attack_damage + strength_modifier
-		
-		return attack_damage
+	def attack_dice_roll(self):
+		return (random.randint(1, self.attack_dice) + self.strength_modifier)
 		
 	def health_remover(self, attack):
-		self.health = self.health - attack
+		temp_health = self.health - attack
+		if temp_health > 0:
+			self.health = temp_health
+		else:
+			self.health = 0
 		
 	def strength_modifier_add(self, value):
 		self.strength_modifier = self.strength_modifier + value
